@@ -1,0 +1,2276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>JRShop</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="fonts/flaticon/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="css/chosen.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.bxslider.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap"
+          rel="stylesheet">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <style>
+    </style>
+    <!--头-->
+    <script>
+        $(function () {
+            //是否登录
+            $.post("user/findOne", function (data) {
+                if (data.flag) {
+                    var subname = data.data.realname.substring(0, 1);
+                    if (data.data.gender == ("男")) {
+                        var msg = "欢迎回来," + subname + "先森";
+                    } else {
+                        var msg = "欢迎回来," + subname + "姓小姐姐";
+                    }
+                    $("#login_reg").html("<a id=\"login_reg\"  href=\"login.html\">" + msg + "</a>");
+                } else {
+                    $("#login_reg").html("<a id=\"login_reg\"  href=\"login.html\">注册 & 登录</a>");
+                }
+            });
+            // 查询智能设备列表
+            $.post("category/findSmart", {"cid": 3}, function (data) {
+                var list = '';
+                for (var i = 0; i < data.length; i++) {
+                    list += '<li class="menu-item"><a href="grid-product-right.html?cid=' + data[i].cid + '">' + data[i].cname + '</a></li>';
+                }
+                $("#smart").html(list);
+            });
+            // 查询手机设备列表
+            $.post("category/findSmartPhone", {"cid": 2}, function (data) {
+                var phone = '';
+                for (var i = 0; i < data.length; i++) {
+                    phone += '<li class="menu-item"><a href="grid-product-right.html?cid=' + data[i].cid + '">' + data[i].cname + '</a></li>';
+                }
+                $("#smartPhone").html(phone);
+            });
+            // 查询电脑设备列表
+            $.post("category/findComputer", {"cid": 1}, function (data) {
+                var computer = '';
+                for (var i = 0; i < data.length; i++) {
+                    computer += '<li class="menu-item"><a href="grid-product-right.html?cid=' + data[i].cid + '">' + data[i].cname + '</a></li>';
+                }
+                $("#computer").html(computer);
+            });
+            // 查询手机设备列表
+            $.post("category/findGameDevice", {"cid": 4}, function (data) {
+                var gamedevice = '';
+                for (var i = 0; i < data.length; i++) {
+                    gamedevice += '<li class="menu-item"><a href="grid-product-right.html?cid=' + data[i].cid + '">' + data[i].cname + '</a></li>';
+                }
+                $("#gamedevice").html(gamedevice);
+            });
+        });
+        //搜索功能
+        $(function () {
+            var gname = $("#searchinfo").val();
+            $("#searchinfo").focus(function () {
+                $.post("goodsServlet/searchInfo", {gname: gname}, function (data) {
+                });
+            });
+            $("#searchbtn").click(function () {
+                location.href = "http://localhost:8080/JRMShop/grid-product-right.html?gname=" + gname + "";
+            });
+        })
+    </script>
+    <!--右上购物车-->
+    <script>
+        $(function () {
+            $.get("carServlet/findAllCarGoods", {}, function (data) {
+                var orli = "";
+                var totalm = 0.0;
+                for (var i = 0; i < data.length; i++) {
+
+                    var cargood = data[i];
+                    $("#carnum").text(data.length);
+                    $("#carnumber").text(data.length);
+                    var exPrice = Math.round((cargood.goods.price) / (cargood.goods.star * 0.1));
+                    var orlis = ' <li class="product-inner">\n' +
+                        '                                                    <div class="product-thumb style1">\n' +
+                        '                                                        <div class="thumb-inner">\n' +
+                        '                                                            <a href="detail.html?gid=' + cargood.gid + '"><img src="' + cargood.goods.normalpic + '"\n' +
+                        '                                                                             alt="c2"></a>\n' +
+                        '                                                        </div>\n' +
+                        '                                                    </div>\n' +
+                        '                                                    <div class="product-innfo">\n' +
+                        '                                                        <div class="product-name"><a href="detail.html?gid=' + cargood.gid + '">' + cargood.goods.gname + '\n' +
+                        '                                                        </a></div>\n' +
+                        '                                                        <a href="#" class="remove"><i class="flaticon-close"\n' +
+                        '                                                                                      aria-hidden="true"></i></a>\n' +
+                        '                                                        <span class="price">\n' +
+                        '\n' +
+                        '                                                                <ins>$' + cargood.goods.price + '</ins>\n' +
+                        '\n' +
+                        '                                                                <del>$' + exPrice + '</del>\n' +
+                        '\n' +
+                        '                                                            </span>\n' +
+                        '                                                    </div>\n' +
+                        '                                                </li>';
+                    orli += orlis;
+                    totalm += cargood.money;
+                }
+                $("#olcar").html(orli);
+                $("#totalprice").text("$" + totalm);
+            });
+
+        });
+    </script>
+    <!--宣传海报-->
+    <script></script>
+
+</head>
+<body class="index-opt-1">
+<div class="wrapper">
+    <form id="block-search-mobile" method="get" class="block-search-mobile">
+        <div class="form-content">
+            <div class="control">
+                <a href="#" class="close-block-serach"><span class="icon flaticon-close"></span></a>
+                <input type="text" name="search" placeholder="Search" class="input-subscribe">
+                <button type="submit" class="btn search">
+                    <span><i class="flaticon-magnifying-glass" aria-hidden="true"></i></span>
+                </button>
+            </div>
+        </div>
+    </form>
+    <div id="block-quick-view-popup" class="block-quick-view-popup">
+        <div class="quick-view-content">
+            <a href="#" class="popup-btn-close"><span class="flaticon-close"></span></a>
+            <div class="product-items">
+                <div class="product-image">
+                    <a href="#"><img src="images/popup-pro.jpg" alt="p1"></a>
+                </div>
+                <div class="product-info">
+                    <div class="product-name"><a href="#">相机</a></div>
+                    <span class="star-rating">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <span class="review">5 Review(s)</span>
+                        </span>
+                    <a href="wishlist.html" class="wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i>添加到愿望单</a>
+                    <div class="product-infomation">
+                        相机好,好相机
+                    </div>
+                </div>
+                <div class="product-info-price">
+                        <span class="price">
+                            <ins>$229.00</ins>
+                            <del>$259.00</del>
+                        </span>
+                    <div class="quantity">
+                        <h6 class="quantity-title">数量:</h6>
+                        <div class="buttons-added">
+                            <input type="text" value="1" title="Qty" class="input-text qty text" size="1">
+                            <a href="#" class="sign plus"><i class="fa fa-plus"></i></a>
+                            <a href="#" class="sign minus"><i class="fa fa-minus"></i></a>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-add-to-cart">加入购物车</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HEADER -->
+    <header class="site-header header-opt-1">
+        <!-- header-top -->
+        <div class="header-top">
+            <div class="container">
+                <!-- hotline -->
+                <ul class="nav-top-left">
+                    <li><a href="#">Welcome to JRM Shop</a></li>
+                </ul><!-- hotline -->
+                <!-- heder links -->
+                <ul class="nav-top-right dagon-nav">
+                    <li class="menu-item-has-children"><a href="#" class="dropdown-toggle"><img
+                            src="images/general/china.jpg" alt="flag">CHINESE<i class="fa fa-angle-down"
+                                                                             aria-hidden="true"></i></a>
+                        <ul class="submenu parent-megamenu">
+                            <li class="switcher-option">
+                                <a href="#" class="flag"><img src="images/general/china.jpg" alt="flag">CHINESE</a>
+                            </li>
+                            <li class="switcher-option">
+                                <a href="#" class="flag"><img src="images/general/l1.jpg" alt="flag">ENGLISH</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="#" class="dropdown-toggle">
+                            <span>中文</span><i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li><a><i class="flaticon-profile" aria-hidden="true"></i><a id="login_reg"></a></a></li>
+                    <li><a id="exit" href="/JRMShop/user/exit"><i class="flaticon-profile" aria-hidden="true"></i>退出</a>
+                    </li>
+                </ul><!-- heder links -->
+            </div>
+        </div> <!-- header-top -->
+        <!-- header-content -->
+        <div class="header-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 nav-left">
+                        <!-- logo -->
+                        <strong class="logo">
+                            <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+                        </strong>
+                        <!-- logo -->
+                    </div>
+                    <div class="col-md-8 nav-mind">
+                        <!-- block search -->
+                        <div class="block-search">
+                            <div class="block-content">
+                                <div class="categori-search  ">
+                                    <select title="categories" data-placeholder="All Categories"
+                                            class="chosen-select categori-search-option">
+                                        <option value="">所有分类</option>
+                                        <optgroup label="数码设备">
+                                            <option>手机</option>
+                                            <option>游戏设备</option>
+                                            <option>电脑主机</option>
+                                            <option>电脑硬件</option>
+                                        </optgroup>
+                                        <optgroup label="智能设备">
+                                            <option>智能家具</option>
+                                            <option>智能音箱</option>
+                                            <option>智能手表</option>
+                                        </optgroup>
+                                        <optgroup label="相机摄像">
+                                            <option>单反相机</option>
+                                            <option>微单相机</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="form-search">
+                                    <div class="box-group">
+                                        <input type="text" class="form-control" id="searchinfo"
+                                               placeholder="输入关键字搜索...">
+                                        <button class="btn btn-search" type="button"  id="searchbtn"><span
+                                                class="flaticon-magnifying-glass"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- block search -->
+                    </div>
+                    <div class="col-md-2 nav-right">
+                        <!-- block mini cart -->
+                        <span data-action="toggle-nav" class="menu-on-mobile hidden-md style2">
+                                <span class="btn-open-mobile home-page">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                                <span class="title-menu-mobile">主菜单</span>
+                            </span>
+                        <div class="block-minicart dropdown style2">
+                            <!--右上购物车-->
+                            <a class="minicart" href="shopping-cart.html">
+                                    <span class="counter qty">
+                                        <span class="cart-icon"><i class="flaticon-shopping-cart"
+                                                                   aria-hidden="true"></i></span>
+                                        <span class="counter-number" id="carnumber"></span>
+                                    </span>
+                                <span class="counter-your-cart">
+                                        <span class="counter-label">购物车:</span>
+                                        <span class="counter-price" id="totalmoney"></span>
+                                    </span>
+                            </a>
+                            <div class="parent-megamenu">
+                                <form>
+                                    <div class="minicart-content-wrapper">
+                                        <div class="subtitle">
+                                            你 有 <span id="carnum"></span> 商 品 在 购 物 车
+                                        </div>
+                                        <div class="minicart-items-wrapper">
+                                            <ol class="minicart-items" id="olcar">
+
+                                            </ol>
+                                        </div>
+                                        <div class="subtotal">
+                                            <span class="label">共计 :</span>
+                                            <span class="price" id="totalprice"></span>
+                                        </div>
+                                        <div class="actions">
+                                            <a class="btn btn-viewcart" href="shopping-cart.html">浏览购物车</a>
+                                            <a class="btn btn-checkout" href="addaddress.html">前往付款</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div><!-- block mini cart -->
+                        <a href="#" class="hidden-md search-hidden"><span class="flaticon-magnifying-glass"></span></a>
+                        <a class="wishlist-minicart" href="wishlist.html"><i class="fa fa-heart-o"
+                                                                             aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- header-content -->
+        <!-- header-menu-bar -->
+        <div class="header-menu-bar header-sticky">
+            <div class="header-menu-nav menu-style-1">
+                <div class="container">
+                    <div class="header-menu-nav-inner ">
+                        <div class="header-menu header-menu-resize">
+                            <ul class="header-nav dagon-nav">
+                                <li class="btn-close hidden-md"><i class="flaticon-close" aria-hidden="true"></i></li>
+                                <li class="menu-item-has-children arrow">
+                                    <a href="index.html">主页</a>
+                                    <span class="toggle-submenu hidden-md"></span>
+                                    <ul class="submenu parent-megamenu">
+                                        <li class="menu-item">
+                                            <a href="index.html">网站首页</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children arrow">
+                                    <a href="grid-product-right.html">商场</a>
+                                    <span class="toggle-submenu hidden-md"></span>
+                                    <ul class="submenu parent-megamenu">
+                                        <li class="menu-item">
+                                            <a href="grid-product-right.html">主商场</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children arrow item-megamenu">
+                                    <a href="#">智能设备</a>
+                                    <span class="toggle-submenu hidden-md"></span>
+                                    <div class="submenu parent-megamenu megamenu">
+                                        <div class="row">
+                                            <div class="submenu-banner submenu-banner-menu-1">
+                                                <div class="col-md-2" style="margin-left: 100px ;">
+                                                    <div class="dropdown-menu-info">
+                                                        <h6 class="dropdown-menu-title">智能设备</h6>
+                                                        <div class="dropdown-menu-content">
+                                                            <ul class="menu" id="smart">
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="menu-item-has-children arrow item-megamenu">
+                                    <a href="#">手机&电脑</a>
+                                    <span class="toggle-submenu hidden-md"></span>
+                                    <div class="submenu parent-megamenu megamenu">
+                                        <div class="row">
+                                            <div class="submenu-banner submenu-banner-menu-2">
+                                                <div class="col-md-3">
+                                                    <div class="dropdown-menu-info">
+                                                        <h6 class="dropdown-menu-title">智能手机</h6>
+                                                        <div class="dropdown-menu-content">
+                                                            <ul class="menu" id="smartPhone">
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="dropdown-menu-info">
+                                                        <h6 class="dropdown-menu-title">电脑</h6>
+                                                        <div class="dropdown-menu-content">
+                                                            <ul class="menu" id="computer">
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="dropdown-menu-info">
+                                                        <h6 class="dropdown-menu-title">游戏设备</h6>
+                                                        <div class="dropdown-menu-content">
+                                                            <ul class="menu" id="gamedevice">
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="menu-item-has-children arrow">
+                                    <a href="#">操作页面</a>
+                                    <span class="toggle-submenu hidden-md"></span>
+                                    <ul class="submenu parent-megamenu">
+                                        <li class="menu-item">
+                                            <a href="shopping-cart.html">购物车</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="wishlist.html">愿望单</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="order_info.html">我的订单</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="compare.html">比较</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children arrow">
+                                    <a href="blog-grid.html">博客论坛</a>
+                                    <span class="toggle-submenu hidden-md"></span>
+                                    <ul class="submenu parent-megamenu">
+                                        <li class="menu-item">
+                                            <a href="blog-grid.html">博客论坛</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children arrow">
+                                    <a href="#">其他</a>
+                                    <span class="toggle-submenu hidden-md"></span>
+                                    <ul class="submenu parent-megamenu">
+                                        <li class="menu-item">
+                                            <a href="about-us.html">关于我们</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="contact-us.html">联系我们</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="login.html">登录&注册</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end header-menu-bar -->
+    </header>
+    <!-- END HEADER -->
+    <!-- MAIN -->
+    <main class="site-main">
+        <div class="block-section-1">
+            <div class="main-slide slide-opt-1 full-width">
+                <div class="owl-carousel nav-style1" data-nav="false" data-autoplay="false" data-dots="true"
+                     data-loop="true" data-margin="0"
+                     data-responsive='{"0":{"items":1},"600":{"items":1},"1000":{"items":1}}' >
+                    <div class="item-slide item-slide-1" style="background-image: url(images/home1/slide-2.jpg)">
+                        <div class="slide-desc slide-desc-1">
+                            <div class="container">
+                                <div class="container-inner">
+                                    <div class="p-primary" >Apple iwatch series 5</div>
+                                    <p >这块表，好不一样</p>
+                                    <a href="detail.html?gid=1" class="btn-shop-now">立即购买</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-slide item-slide-2" style="background-image: url(images/home1/slide-1.jpg)">
+                        <div class="slide-desc slide-desc-2">
+                            <div class="container">
+                                <div class="container-inner">
+                                    <div class="p-primary">Apple iMac 2019新款</div>
+                                    <p>外形过人，实力过分</p>
+                                    <a href="detail.html?gid=2" class="btn-shop-now">立即购买</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-slide item-slide-3" style="background-image: url(images/home1/slide-3.jpg)">
+                        <div class="slide-desc slide-desc-3">
+                            <div class="container">
+                                <div class="container-inner">
+                                    <div class="p-primary">微软 Xbox One原装游戏手柄</div>
+                                    <p>为出色游戏表现而生,玩出高手风范</p>
+                                    <a href="detail.html?gid=3" class="btn-shop-now">立即购买</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block-section-99">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="dagon-iconbox style-02">
+                            <div class="iconbox-inner">
+                                <div class="icon"><span class="flaticon-delivery-truck"></span></div>
+                                <div class="content"><h4 class="title">极速发货</h4>
+                                    <p class="text">强大团队给予最快发货流程</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="dagon-iconbox style-02">
+                            <div class="iconbox-inner">
+                                <div class="icon"><span class="flaticon-refresh"></span></div>
+                                <div class="content"><h4 class="title">30 天内包换新</h4>
+                                    <p class="text">实时守护你的的权益</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="dagon-iconbox style-02">
+                            <div class="iconbox-inner">
+                                <div class="icon"><span class="flaticon-quality-badge"></span></div>
+                                <div class="content"><h4 class="title">最好的产品</h4>
+                                    <p class="text">正品保证,全国联保</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block-daily-deals style1">
+            <div class="container">
+                <div class="title-of-section main-title">近期特惠</div>
+                <div class="owl-carousel nav-style2 border-background equal-container" data-nav="true"
+                     data-autoplay="false" data-dots="false" data-loop="true" data-margin="30"
+                     data-responsive='{"0":{"items":1},"530":{"items":2},"768":{"items":3},"992":{"items":2}}'>
+                    <div class="deal-of-day equal-elem">
+                        <div class="product-thumb style1">
+                            <div class="thumb-inner">
+                                <a href="#"><img src="images/home2/d1.jpg" alt="d1"></a>
+                            </div>
+                        </div>
+                        <div class="product-innfo">
+                            <div class="product-name"><a href="#">Apple iMac【2019年款】</a></div>
+                            <span class="price">
+                                    <ins>$229.00</ins>
+                                    <del>$259.00</del>
+                                    <span class="onsale">-50%</span>
+                                </span>
+                            <span class="star-rating">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <span class="review">5 Review(s)</span>
+                                </span>
+                            <div class="product-count-down">
+                                <div class="kt-countdown" data-y="2020" data-m="6" data-d="1" data-h="10" data-i="0"
+                                     data-s="0"></div>
+                            </div>
+                            <a href="#" class="btn-add-to-cart">加入购物车</a>
+                        </div>
+                    </div>
+                    <div class="deal-of-day equal-elem">
+                        <div class="product-thumb style1">
+                            <div class="thumb-inner">
+                                <a href="#"><img src="images/home2/d2.jpg" alt="d2"></a>
+                            </div>
+                        </div>
+                        <div class="product-innfo">
+                            <div class="product-name"><a href="#">Apple iPhone 11</a>
+                            </div>
+                            <span class="price">
+                                    <ins>$229.00</ins>
+                                    <del>$259.00</del>
+                                    <span class="onsale">-50%</span>
+                                </span>
+                            <span class="star-rating">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <span class="review">5 Review(s)</span>
+                                </span>
+                            <div class="product-count-down">
+                                <div class="kt-countdown" data-y="2020" data-m="7" data-d="1" data-h="20" data-i="0"
+                                     data-s="0"></div>
+                            </div>
+                            <a href="#" class="btn-add-to-cart">加入购物车</a>
+                        </div>
+                    </div>
+                    <div class="deal-of-day equal-elem">
+                        <div class="product-thumb style1">
+                            <div class="thumb-inner">
+                                <a href="#"><img src="images/home2/d1.jpg" alt="d1"></a>
+                            </div>
+                        </div>
+                        <div class="product-innfo">
+                            <div class="product-name"><a href="#">Apple iMac【2019年款】</a></div>
+                            <span class="price">
+                                    <ins>$229.00</ins>
+                                    <del>$259.00</del>
+                                    <span class="onsale">-50%</span>
+                                </span>
+                            <span class="star-rating">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <span class="review">5 Review(s)</span>
+                                </span>
+                            <div class="product-count-down">
+                                <div class="kt-countdown" data-y="2020" data-m="6" data-d="1" data-h="10" data-i="0"
+                                     data-s="0"></div>
+                            </div>
+                            <a href="#" class="btn-add-to-cart">加入购物车</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block-section-3">
+            <div class="container">
+                <div class="row" >
+                    <div class="col-md-4 col-sm-4">
+                        <div class="promotion-banner style-1">
+                            <a href="#" class="banner-img">
+                                <img src="images/home2/banner-1.jpg" alt="banner-1">
+                            </a>
+                            <div class="promotion-banner-inner">
+                                <h4>Beats耳机</h4>
+                                <h3>减下<strong>40%</strong> 折扣</h3>
+                                <a class="banner-link" href="grid-product-right.html">立即购买</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="promotion-banner style-1">
+                            <a href="#" class="banner-img">
+                                <img src="images/home2/banner-1.jpg" alt="banner-1">
+                            </a>
+                            <div class="promotion-banner-inner">
+                                <h4>Beats耳机</h4>
+                                <h3>减下<strong>40%</strong> 折扣</h3>
+                                <a class="banner-link" href="grid-product-right.html">立即购买</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="promotion-banner style-1">
+                            <a href="#" class="banner-img">
+                                <img src="images/home2/banner-1.jpg" alt="banner-1">
+                            </a>
+                            <div class="promotion-banner-inner">
+                                <h4>Beats耳机</h4>
+                                <h3>减下<strong>40%</strong> 折扣</h3>
+                                <a class="banner-link" href="grid-product-right.html">立即购买</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="block-section-4">
+            <div class="container">
+                <div class="title-of-section main-title">每日好物</div>
+                <div class="tab-product tab-product-fade-effect">
+                    <ul class="box-tabs nav-tab">
+                        <li class="active"><a data-animated="" data-toggle="tab" href="#tab-1">所有产品</a></li>
+                        <li><a data-animated="" data-toggle="tab" href="#tab-2">相机</a></li>
+                        <li><a data-animated="" data-toggle="tab" href="#tab-3">笔记本</a></li>
+                        <li><a data-animated="" data-toggle="tab" href="#tab-4">音箱</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-container">
+                            <div id="tab-1" class="tab-panel active">
+                                <div class="owl-carousel nav-style2 border-background equal-container" data-nav="false"
+                                     data-autoplay="false" data-dots="false" data-loop="true" data-margin="30"
+                                     data-responsive='{"0":{"items":1},"480":{"items":2},"768":{"items":3},"992":{"items":4},"1200":{"items":4}}'>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p1.jpg" alt="p1"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速查看</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">游戏手柄
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p6.jpg" alt="p6"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Apple IMAC
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p2.jpg" alt="p2"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Photo Camera
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p7.jpg" alt="p7"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Ring Video Doorbell
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p3.jpg" alt="p3"></a>
+                                                    </div>
+                                                    <span class="onnew">new</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Smartphone 4 GB
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p8.jpg" alt="p8"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Retina Laptop
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p4.jpg" alt="p4"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">智能手机【新款】
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p9.jpg" alt="p9"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">智能手机【新款】
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p5.jpg" alt="p5"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Notebook Pro
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p10.jpg"
+                                                                         alt="p10"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Notebook Pro
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-2" class="tab-panel">
+                                <div class="owl-carousel nav-style2 border-background equal-container" data-nav="false"
+                                     data-autoplay="false" data-dots="false" data-loop="true" data-margin="30"
+                                     data-responsive='{"0":{"items":1},"480":{"items":2},"768":{"items":3},"992":{"items":4},"1200":{"items":4}}'>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p6.jpg" alt="p6"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Retina Laptop
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p2.jpg" alt="p2"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Photo Camera
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p7.jpg" alt="p7"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Ring Video Doorbell
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p1.jpg" alt="p1"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Game Controller
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p8.jpg" alt="p8"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Retina Laptop
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p4.jpg" alt="p4"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">智能手机【新款】
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p3.jpg" alt="p3"></a>
+                                                    </div>
+                                                    <span class="onnew">new</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Smartphone 4 GB
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p9.jpg" alt="p9"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">智能手机【新款】
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p5.jpg" alt="p5"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Notebook Pro
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p10.jpg"
+                                                                         alt="p10"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Notebook Pro
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-3" class="tab-panel">
+                                <div class="owl-carousel nav-style2 border-background equal-container" data-nav="false"
+                                     data-autoplay="false" data-dots="false" data-loop="true" data-margin="30"
+                                     data-responsive='{"0":{"items":1},"480":{"items":2},"768":{"items":3},"992":{"items":4},"1200":{"items":4}}'>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p3.jpg" alt="p3"></a>
+                                                    </div>
+                                                    <span class="onnew">new</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Smartphone 4 GB
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p2.jpg" alt="p2"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Photo Camera
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p10.jpg"
+                                                                         alt="p10"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Notebook Pro
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p1.jpg" alt="p1"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Game Controller
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p8.jpg" alt="p8"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Retina Laptop
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p4.jpg" alt="p4"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">智能手机【新款】
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p6.jpg" alt="p6"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Retina Laptop
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p9.jpg" alt="p9"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">智能手机【新款】
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p5.jpg" alt="p5"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Notebook Pro
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p7.jpg" alt="p7"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Ring Video Doorbell
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-4" class="tab-panel">
+                                <div class="owl-carousel nav-style2 border-background equal-container" data-nav="false"
+                                     data-autoplay="false" data-dots="false" data-loop="true" data-margin="30"
+                                     data-responsive='{"0":{"items":1},"480":{"items":2},"768":{"items":3},"992":{"items":4},"1200":{"items":4}}'>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p2.jpg" alt="p2"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Photo Camera
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p6.jpg" alt="p6"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Retina Laptop
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p1.jpg" alt="p1"></a>
+                                                    </div>
+                                                    <span class="onsale">-50%</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Game Controller
+                                                    </a></div>
+                                                    <span class="price">
+                                                            <ins>$229.00</ins>
+                                                            <del>$259.00</del>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p7.jpg" alt="p7"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Ring Video Doorbell
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-one-row">
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p4.jpg" alt="p4"></a>
+                                                    </div>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">智能手机【新款】
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-item style1">
+                                            <div class="product-inner equal-elem">
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="#"><img src="images/home2/p3.jpg" alt="p3"></a>
+                                                    </div>
+                                                    <span class="onnew">new</span>
+                                                    <a href="#" class="quick-view">快速预览</a>
+                                                </div>
+                                                <div class="product-innfo">
+                                                    <div class="product-name"><a href="#">Smartphone 4 GB
+                                                    </a></div>
+                                                    <span class="price price-dark">
+                                                            <ins>$229.00</ins>
+                                                        </span>
+                                                    <span class="star-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <span class="review">5 Review(s)</span>
+                                                        </span>
+                                                    <div class="group-btn-hover">
+                                                        <div class="inner">
+                                                            <a href="compare.html" class="compare"><i
+                                                                    class="fa fa-exchange"></i></a>
+                                                            <a href="#" class="add-to-cart">加入购物车</a>
+                                                            <a href="wishlist.html" class="wishlist"><i
+                                                                    class="fa fa-heart-o"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block-section-6 page-product">
+            <div class="container">
+                <div class="promotion-banner style-3">
+                    <a href="#" class="banner-img"><img src="images/home2/banner-3.jpg" alt="banner-3"></a>
+                    <div class="promotion-banner-inner">
+                        <h4>Top Collection</h4>
+                        <h3>所有最新智能手表</h3>
+                        <a class="banner-link" href="grid-product-right.html">立即查看</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block-the-blog">
+            <div class="container">
+                <div class="title-of-section"><span>来自博客</span></div>
+                <div class="owl-carousel nav-style2" data-nav="true" data-autoplay="false" data-dots="true"
+                     data-loop="true" data-margin="30"
+                     data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"992":{"items":3}}'>
+                    <div class="blog-item">
+                        <div class="post-thumb">
+                            <a href="#"><img src="images/home1/blog1.jpg" alt="blog1"></a>
+                        </div>
+                        <div class="post-item-info">
+                            <h3 class="post-name"><a href="#">It’s all about the bread: whole grain home</a></h3>
+                            <div class="post-metas">
+                                <span class="author">Post by: <span>Admin</span></span>
+                                <span class="comment"><i class="fa fa-comment" aria-hidden="true"></i>36 Comments</span>
+                            </div>
+                            <div>Lorem ipsum dolor sit amet consectetur adipiscing, elit integer urna placerat donec,
+                                cum viverra egestas ac luctus...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-item">
+                        <div class="post-thumb">
+                            <a href="#"><img src="images/home1/blog2.jpg" alt="blog2"></a>
+                        </div>
+                        <div class="post-item-info">
+                            <h3 class="post-name"><a href="#">Ridiculus nascetur, malesuada non in netus.</a></h3>
+                            <div class="post-metas">
+                                <span class="author">Post by: <span>Admin</span></span>
+                                <span class="comment"><i class="fa fa-comment" aria-hidden="true"></i>36 Comments</span>
+                            </div>
+                            <div>Lorem ipsum dolor sit amet consectetur adipiscing, elit integer urna placerat donec,
+                                cum viverra egestas ac luctus...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-item">
+                        <div class="post-thumb">
+                            <a href="#"><img src="images/home1/blog3.jpg" alt="blog3"></a>
+                        </div>
+                        <div class="post-item-info">
+                            <h3 class="post-name"><a href="#">Using Lorem Ipsum allows designers to put</a></h3>
+                            <div class="post-metas">
+                                <span class="author">Post by: <span>Admin</span></span>
+                                <span class="comment"><i class="fa fa-comment" aria-hidden="true"></i>36 Comments</span>
+                            </div>
+                            <div>Lorem ipsum dolor sit amet consectetur adipiscing, elit integer urna placerat donec,
+                                cum viverra egestas ac luctus...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-item">
+                        <div class="post-thumb">
+                            <a href="#"><img src="images/home1/blog1.jpg" alt="blog1"></a>
+                        </div>
+                        <div class="post-item-info">
+                            <h3 class="post-name"><a href="#">It’s all about the bread: whole grain home</a></h3>
+                            <div class="post-metas">
+                                <span class="author">Post by: <span>Admin</span></span>
+                                <span class="comment"><i class="fa fa-comment" aria-hidden="true"></i>36 Comments</span>
+                            </div>
+                            <div>Lorem ipsum dolor sit amet consectetur adipiscing, elit integer urna placerat donec,
+                                cum viverra egestas ac luctus...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- end MAIN -->
+    <!-- FOOTER -->
+    <footer class="site-footer footer-opt-2">
+        <div class="footer-top full-width">
+            <div class="owl-carousel instagram" data-nav="false"
+                 data-autoplay="false" data-dots="false" data-loop="true" data-margin="0"
+                 data-responsive='{"0":{"items":2},"480":{"items":2},"768":{"items":3},"992":{"items":4},"1200":{"items":5}}'>
+                <div class="item-instagram">
+                   <!--底部图片-->
+                    <a href="#">
+                        <img src="images/item-instagram-1.jpg" alt="img">
+                    </a>
+                    <span class="text">
+                        <i class="icon fa fa-instagram" aria-hidden="true"></i>
+			        </span>
+                </div>
+                <div class="item-instagram">
+                    <a href="#">
+                        <img src="images/item-instagram-2.jpg" alt="img">
+                    </a>
+                    <span class="text">
+                        <i class="icon fa fa-instagram" aria-hidden="true"></i>
+			        </span>
+                </div>
+                <div class="item-instagram">
+                    <a href="#">
+                        <img src="images/item-instagram-3.jpg" alt="img">
+                    </a>
+                    <span class="text">
+                        <i class="icon fa fa-instagram" aria-hidden="true"></i>
+			        </span>
+                </div>
+                <div class="item-instagram">
+                    <a href="#">
+                        <img src="images/item-instagram-4.jpg" alt="img">
+                    </a>
+                    <span class="text">
+                        <i class="icon fa fa-instagram" aria-hidden="true"></i>
+			        </span>
+                </div>
+                <div class="item-instagram">
+                    <a href="#">
+                        <img src="images/item-instagram-5.jpg" alt="img">
+                    </a>
+                    <span class="text">
+                        <i class="icon fa fa-instagram" aria-hidden="true"></i>
+			        </span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-column equal-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 equal-elem">
+                        <div class="logo-footer"><img src="images/logo-light.png" alt="logo"></div>
+                        <div class="contacts">
+                            <span class="contacts-info info-address ">中国 江干区 九堡旺天商务楼</span>
+                            <span class="contacts-info info-phone">(+86) 123 456 10319</span>
+                            <span class="contacts-info info-support">541252708@JRMShop.com</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-6 equal-elem">
+                        <div class="links">
+                            <h3 class="title-of-section">我的账户</h3>
+                            <ul>
+                                <li><a href="#">登录</a></li>
+                                <li><a href="#">查看购物车</a></li>
+                                <li><a href="#">我的愿望单</a></li>
+                                <li><a href="#">条款及细则</a></li>
+                                <li><a href="#">联系我们</a></li>
+                                <li><a href="#">追踪我的订单</a></li>
+                                <li><a href="#">帮助</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-6 equal-elem">
+                        <div class="links">
+                            <h3 class="title-of-section">信息</h3>
+                            <ul>
+                                <li><a href="#">特价商品</a></li>
+                                <li><a href="#">最新产品</a></li>
+                                <li><a href="#">最畅销</a></li>
+                                <li><a href="#">关于我们</a></li>
+                                <li><a href="#">联系我们</a></li>
+                                <li><a href="#">网站地图</a></li>
+                                <li><a href="#">博客</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 equal-elem">
+                        <div class="links">
+                            <h3 class="title-of-section">联系</h3>
+                            <span class="span-newsletter">获取有关新产品，限量发行等的通知</span>
+                            <div class="newsletter-form">
+                                <form id="newsletter-validate-detail" class="form subscribe">
+                                    <div class="control">
+                                        <input type="email" placeholder="输入你的邮箱" id="newsletter" name="email"
+                                               class="input-subscribe">
+                                        <button type="submit" title="Subscribe" class="btn subscribe">
+                                            <span>注册</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="socials">
+                                <a href="#" class="social"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#" class="social"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#" class="social"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                                <a href="#" class="social"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright full-width">
+            <div class="container">
+                <div class="copyright-right">
+                    Copyright &copy; 2020.Company name All rights reserved.<a target="_blank"
+                                                                              href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                </div>
+                <div class="pay-men">
+                    <a href="#"><img src="images/general/pay1.jpg" alt="pay1"></a>
+                    <a href="#"><img src="images/general/pay2.jpg" alt="pay2"></a>
+                    <a href="#"><img src="images/general/pay3.jpg" alt="pay3"></a>
+                    <a href="#"><img src="images/general/pay4.jpg" alt="pay4"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end FOOTER -->
+</div>
+<a href="#" id="scrollup" title="Scroll to Top">Scroll</a>
+<!-- jQuery -->
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="js/wow.min.js"></script>
+<script type="text/javascript" src="js/jquery.actual.min.js"></script>
+<script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="js/jquery.sticky.js"></script>
+<script type="text/javascript" src="js/jquery.elevateZoom.min.js"></script>
+<script src="js/fancybox/source/jquery.fancybox.pack.js"></script>
+<script src="js/fancybox/source/helpers/jquery.fancybox-media.js"></script>
+<script src="js/fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
+<script type="text/javascript" src="js/function.js"></script>
+<script type="text/javascript" src="js/Modernizr.js"></script>
+<script type="text/javascript" src="js/jquery.plugin.js"></script>
+<script type="text/javascript" src="js/jquery.countdown.js"></script>
+</body>
+</html>

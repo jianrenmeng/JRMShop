@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/pick-pcc.min.1.0.1.css">
+
+
+</head>
+<body>
+<div class="a">
+
+    <form action="use" method="get">
+    <a href="javascript:void(0)" class="pick-area pick-area1" name="山东省/临沂市/兰陵县"></a>
+        <input type="text"  name="address">
+        <input type="submit" value="fajfa">
+    </form>
+</div>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/pick-pcc.min.1.0.1.js"></script>
+<script type="text/javascript">
+    $(".pick-area1").pickArea({
+        "getVal":function(){
+            //console.log($(".pick-area-hidden").val())
+            //console.log($(".pick-area-dom").val())
+            var thisdom = $("."+$(".pick-area-dom").val());
+            thisdom.next().val($(".pick-area-hidden").val());
+        }
+    });
+
+
+</script>
+</body>
+</html>

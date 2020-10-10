@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>JRMShop</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="fonts/flaticon/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="css/chosen.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.bxslider.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap"
+          rel="stylesheet">
+</head>
+<body class="page-product">
+<div class="wrapper">
+    <form id="block-search-mobile" method="get" class="block-search-mobile">
+        <div class="form-content">
+            <div class="control">
+                <a href="#" class="close-block-serach"><span class="icon flaticon-close"></span></a>
+                <input type="text" name="search" placeholder="Search" class="input-subscribe">
+                <button type="submit" class="btn search">
+                    <span><i class="flaticon-magnifying-glass" aria-hidden="true"></i></span>
+                </button>
+            </div>
+        </div>
+    </form>
+    <div id="block-quick-view-popup" class="block-quick-view-popup">
+        <div class="quick-view-content">
+            <a href="#" class="popup-btn-close"><span class="flaticon-close"></span></a>
+            <div class="product-items">
+                <div class="product-image">
+                    <a href="#"><img src="images/popup-pro.jpg" alt="p1"></a>
+                </div>
+                <div class="product-info">
+                    <div class="product-name"><a href="#">相机</a></div>
+                    <span class="star-rating">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <span class="review">5 Review(s)</span>
+                        </span>
+                    <a href="wishlist.html" class="wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i>添加到愿望单</a>
+                    <div class="product-infomation">
+                        相机好,好相机
+                    </div>
+                </div>
+                <div class="product-info-price">
+                        <span class="price">
+                            <ins>$229.00</ins>
+                            <del>$259.00</del>
+                        </span>
+                    <div class="quantity">
+                        <h6 class="quantity-title">数量:</h6>
+                        <div class="buttons-added">
+                            <input type="text" value="1" title="Qty" class="input-text qty text" size="1">
+                            <a href="#" class="sign plus"><i class="fa fa-plus"></i></a>
+                            <a href="#" class="sign minus"><i class="fa fa-minus"></i></a>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-add-to-cart">加入购物车</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HEADER -->
+    <header class="site-header header-opt-1">
+        <!-- header-top -->
+        <div class="header-top">
+            <div class="container">
+                <!-- hotline -->
+                <ul class="nav-top-left">
+                    <li><a href="#">Welcome to JRM Shop</a></li>
+                </ul><!-- hotline -->
+                <!-- heder links -->
+                <ul class="nav-top-right dagon-nav">
+                    <li class="menu-item-has-children"><a href="#" class="dropdown-toggle"><img
+                            src="images/general/china.jpg" alt="flag">CHINESE<i class="fa fa-angle-down"
+                                                                             aria-hidden="true"></i></a>
+                        <ul class="submenu parent-megamenu">
+                            <li class="switcher-option">
+                                <a href="#" class="flag"><img src="images/general/china.jpg" alt="flag">CHINESE</a>
+                            </li>
+                            <li class="switcher-option">
+                                <a href="#" class="flag"><img src="images/general/china.jpg" alt="flag">ENGLISH</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="#" class="dropdown-toggle">
+                            <span>中文</span><i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li><a href="#"><i class="flaticon-profile" aria-hidden="true"></i>注册 / 登录</a></li>
+                </ul><!-- heder links -->
+            </div>
+        </div><!-- header-top -->
+        <!-- header-content -->
+        <div class="header-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 nav-left">
+                        <!-- logo -->
+                        <strong class="logo">
+                            <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+                        </strong>
+                        <!-- logo -->
+                    </div>
+                    <div class="col-md-8 nav-mind">
+                        <!-- block search -->
+                        <div class="block-search">
+                            <div class="block-content">
+                                <div class="categori-search  ">
+                                    <select title="categories" data-placeholder="All Categories"
+                                            class="chosen-select categori-search-option">
+                                        <option value="">所有分类</option>
+                                        <optgroup label="数码设备">
+                                            <option>手机</option>
+                                            <option>游戏设备</option>
+                                            <option>电脑主机</option>
+                                            <option>电脑硬件</option>
+                                        </optgroup>
+                                        <optgroup label="智能设备">
+                                            <option>智能家居</option>
+                                            <option>智能音箱</option>
+                                            <option>智能手表</option>
+                                        </optgroup>
+                                        <optgroup label="相机摄像">
+                                            <option>单反相机</option>
+                                            <option>微单相机</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="form-search">
+                                    <form>
+                                        <div class="box-group">
+                                            <input type="text" class="form-control"
+                                                   placeholder="输入关键字搜索...">
+                                            <button class="btn btn-search" type="button"><span
+                                                    class="flaticon-magnifying-glass"></span></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!-- block search -->
+                    </div>
+                    <div class="col-md-2 nav-right">
+                        <!-- block mini cart -->
+                        <span data-action="toggle-nav" class="menu-on-mobile hidden-md style2">
+                                <span class="btn-open-mobile home-page">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                                <span class="title-menu-mobile">主菜单</span>
+                            </span>
+                        <div class="block-minicart dropdown style2">
+                            <a class="minicart" href="#">
+
+                                    <span class="counter qty">
+
+                                        <span class="cart-icon"><i class="flaticon-shopping-cart"
+                                                                   aria-hidden="true"></i></span>
+
+                                        <span class="counter-number">4</span>
+
+                                    </span>
+                                <span class="counter-your-cart">
+
+                                        <span class="counter-label">购物车:</span>
+
+                                        <span class="counter-price">$00.00</span>
+
+                                    </span>
+                            </a>
+                            <div class="parent-megamenu">
+                                <form>
+                                    <div class="minicart-content-wrapper">
+                                        <div class="subtitle">
+                                            你 有 <span>2</span> 商 品 在 购 物 车
+                                        </div>
+                                        <div class="minicart-items-wrapper">
+                                            <ol class="minicart-items">
+                                                <li class="product-inner">
+                                                    <div class="product-thumb style1">
+                                                        <div class="thumb-inner">
+                                                            <a href="#"><img src="images/home2/c1.jpg"
+                                                                             alt="c1"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-innfo">
+                                                        <div class="product-name"><a href="#">Notebook Pro
+                                                        </a></div>
+                                                        <a href="#" class="remove"><i class="flaticon-close"
+                                                                                      aria-hidden="true"></i></a>
+                                                        <span class="price price-dark">
+
+                                                                <ins>$229.00</ins>
+
+                                                            </span>
+                                                    </div>
+                                                </li>
+                                                <li class="product-inner">
+                                                    <div class="product-thumb style1">
+                                                        <div class="thumb-inner">
+                                                            <a href="#"><img src="images/home2/c2.jpg"
+                                                                             alt="c2"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-innfo">
+                                                        <div class="product-name"><a href="#">Bluetooth Speaker
+                                                        </a></div>
+                                                        <a href="#" class="remove"><i class="flaticon-close"
+                                                                                      aria-hidden="true"></i></a>
+                                                        <span class="price">
+
+                                                                <ins>$229.00</ins>
+
+                                                                <del>$259.00</del>
+
+                                                            </span>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                        <div class="subtotal">
+                                            <span class="label">共计 :</span>
+                                            <span class="price">$480.00</span>
+                                        </div>
+                                        <div class="actions">
+                                            <a class="btn btn-viewcart" href="shopping-cart.html">浏览购物车</a>
+                                            <a class="btn btn-checkout" href="addaddress.html">前往付款</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div><!-- block mini cart -->
+                        <a href="#" class="hidden-md search-hidden"><span class="flaticon-magnifying-glass"></span></a>
+                        <a class="wishlist-minicart" href="wishlist.html"><i class="fa fa-heart-o"
+                                                                             aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- header-content -->
+        <!-- header-menu-bar -->
+        <div class="header-menu-bar header-sticky">
+            <div class="header-menu-nav menu-style-2">
+                <div class="container">
+                    <div class="header-menu-nav-inner">
+                        <div id="box-vertical-megamenus" class="box-vertical-megamenus nav-toggle-cat">
+                            <h4 class="title active">
+                                    <span class="btn-open-mobile home-page">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </span>
+                                <span class="title-menu">所有分类</span>
+                            </h4>
+                            <div class="vertical-menu-content">
+                                <span class="btn-close hidden-md"><i class="flaticon-close"
+                                                                     aria-hidden="true"></i></span>
+                                <ul class="vertical-menu-list">
+                                    <li class="menu-item-has-children arrow item-megamenu">
+                                        <a href="#" class="dropdown-toggle">手机&电脑</a>
+                                        <span class="toggle-submenu hidden-md"></span>
+                                        <div class="submenu parent-megamenu megamenu">
+                                            <div class="row">
+                                                <div class="submenu-banner submenu-banner-menu-1">
+                                                    <div class="col-md-4">
+                                                        <div class="dropdown-menu-info">
+                                                            <h6 class="dropdown-menu-title">手机</h6>
+                                                            <div class="dropdown-menu-content">
+                                                                <ul class="menu">
+                                                                    <li class="menu-item"><a href="#">智能手机
+                                                                    </a></li>
+                                                                    <li class="menu-item"><a href="#">拍照手机</a></li>
+                                                                    <li class="menu-item"><a href="#">游戏手机
+                                                                    </a></li>
+                                                                    <li class="menu-item"><a href="#">老年机</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="dropdown-menu-info">
+                                                            <h6 class="dropdown-menu-title">电脑</h6>
+                                                            <div class="dropdown-menu-content">
+                                                                <ul class="menu">
+                                                                    <li class="menu-item"><a href="#">笔记本电脑</a></li>
+                                                                    <li class="menu-item"><a href="#">轻薄本电脑
+                                                                    </a></li>
+                                                                    <li class="menu-item"><a href="#">游戏本</a></li>
+                                                                    <li class="menu-item"><a href="#">
+                                                                        台式机</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="menu-item-has-children arrow item-megamenu">
+                                        <a href="#" class="dropdown-toggle">智能设备</a>
+                                        <span class="toggle-submenu hidden-md"></span>
+                                        <div class="submenu parent-megamenu megamenu">
+                                            <div class="row">
+                                                <div class="submenu-banner submenu-banner-menu-1">
+                                                    <div class="col-md-4">
+                                                        <div class="dropdown-menu-info">
+                                                            <h6 class="dropdown-menu-title">智能设备</h6>
+                                                            <div class="dropdown-menu-content">
+                                                                <ul class="menu">
+                                                                    <li class="menu-item"><a href="#">智能家具</a></li>
+                                                                    <li class="menu-item"><a href="#">智能手表</a></li>
+                                                                    <li class="menu-item"><a href="#">智能音箱</a></li>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="menu-item-has-children arrow item-megamenu">
+                                        <a href="#" class="dropdown-toggle">相机摄影</a>
+                                        <span class="toggle-submenu hidden-md"></span>
+                                        <div class="submenu parent-megamenu megamenu">
+                                            <div class="row">
+                                                <div class="submenu-banner submenu-banner-menu-1">
+                                                    <div class="col-md-4">
+                                                        <div class="dropdown-menu-info">
+                                                            <h6 class="dropdown-menu-title">相机摄影</h6>
+                                                            <div class="dropdown-menu-content">
+                                                                <ul class="menu">
+                                                                    <li class="menu-item"><a href="#">单反相机
+                                                                    </a></li>
+                                                                    <li class="menu-item"><a href="#">微单相机</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="menu-item-has-children arrow item-megamenu">
+                                        <a href="#" class="dropdown-toggle">游戏设备</a>
+                                        <span class="toggle-submenu hidden-md"></span>
+                                        <div class="submenu parent-megamenu megamenu">
+                                            <div class="row">
+                                                <div class="submenu-banner submenu-banner-menu-1">
+                                                    <div class="col-md-4">
+                                                        <div class="dropdown-menu-info">
+                                                            <h6 class="dropdown-menu-title">耳机</h6>
+                                                            <div class="dropdown-menu-content">
+                                                                <ul class="menu">
+                                                                    <li class="menu-item"><a href="#">键盘
+                                                                    </a></li>
+                                                                    <li class="menu-item"><a href="#">鼠标</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="header-menu header-menu-resize">
+                            <ul class="header-nav dagon-nav">
+                                <li class="btn-close hidden-md"><i class="flaticon-close" aria-hidden="true"></i></li>
+                                <li class="menu-item-has-children arrow">
+                                    <a href="index2.html" class="dropdown-toggle">首页</a>
+                                    <span class="toggle-submenu hidden-md"></span>
+                                    <ul class="submenu parent-megamenu">
+                                        <li class="menu-item">
+                                            <a href="index.html">首页</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children arrow">
+                                    <a href="#" class="dropdown-toggle">商场</a>
+                                    <span class="toggle-submenu hidden-md"></span>
+                                    <ul class="submenu parent-megamenu">
+                                        <li class="menu-item">
+                                            <a href="grid-product-right.html">主商场</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children arrow">
+                                    <a href="#" class="dropdown-toggle">操作页面</a>
+                                    <span class="toggle-submenu hidden-md"></span>
+                                    <ul class="submenu parent-megamenu">
+                                        <li class="menu-item">
+                                            <a href="shopping-cart.html">购物车</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="wishlist.html">愿望单</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="localhost:8080/JRMShop/order_info.html">我的订单</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="login.html">登录&注册</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="compare.html">比较</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="contact-us.html" class="dropdown-toggle">联系我们</a>
+                                    <span class="toggle-submenu hidden-md"></span>
+                                </li>
+                                <li class="menu-item-has-children arrow">
+                                    <a href="#" class="dropdown-toggle">博客论坛</a>
+                                    <span class="toggle-submenu hidden-md"></span>
+                                    <ul class="submenu parent-megamenu">
+                                        <li class="menu-item">
+                                            <a href="blog-grid.html">博客首页</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <span data-action="toggle-nav" class="menu-on-mobile hidden-md">
+                                <span class="btn-open-mobile home-page">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                                <span class="title-menu-mobile">主菜单</span>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header><!-- end HEADER -->
+    <!-- MAIN -->
+    <main class="site-main shopping-cart">
+        <div class="container">
+            <ol class="breadcrumb-page">
+                <li><a href="index.html">首页 </a></li>
+                <li class="active"><a href="#">比较页</a></li>
+            </ol>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-cart form-wishlist">
+                        <div class="table-cart">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="tb-image"></th>
+                                    <th class="tb-product">商品名称</th>
+                                    <th class="tb-price">价格</th>
+                                    <th class="tb-qty">描述信息</th>
+                                    <th class="tb-add">加入购物车</th>
+                                    <th class="tb-remove"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="tb-image"><a href="#" class="item-photo"><img
+                                            src="images/cart1.jpg"
+                                            alt="cart"></a></td>
+                                    <td class="tb-product">
+                                        <div class="product-name"><a href="#">摄像头</a></div>
+                                    </td>
+                                    <td class="tb-price">
+                                        <span class="price">$229.00</span>
+                                    </td>
+                                    <td class="tb-var">
+                                        <span>Color: Red, Blue, Yellow</span>
+                                    </td>
+                                    <td class="tb-add">
+                                        <button type="submit">
+                                            <span>加入购物车</span>
+                                        </button>
+                                    </td>
+                                    <td class="tb-remove">
+                                        <a href="#" class="action-remove"><span><i class="flaticon-close"
+                                                                                   aria-hidden="true"></i></span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tb-image"><a href="#" class="item-photo"><img
+                                            src="images/cart2.jpg"
+                                            alt="cart"></a>
+                                    <td class="tb-product">
+                                        <div class="product-name"><a href="#">Photo Camera
+                                        </a></div>
+                                    </td>
+                                    <td class="tb-price">
+                                        <span class="price">$229.00</span>
+                                    </td>
+                                    <td class="tb-var">
+                                        <span>Color: Red, Black, White</span>
+                                    </td>
+                                    <td class="tb-add">
+                                        <button type="submit">
+                                            <span>加入购物车</span>
+                                        </button>
+                                    </td>
+                                    <td class="tb-remove">
+                                        <a href="#" class="action-remove"><span><i class="flaticon-close"
+                                                                                   aria-hidden="true"></i></span></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main><!-- end MAIN -->
+    <!-- FOOTER -->
+    <footer class="site-footer footer-opt-2">
+        <div class="footer-top full-width">
+            <div class="owl-carousel instagram" data-nav="false"
+                 data-autoplay="false" data-dots="false" data-loop="true" data-margin="0"
+                 data-responsive='{"0":{"items":2},"480":{"items":2},"768":{"items":3},"992":{"items":4},"1200":{"items":5}}'>
+                <div class="item-instagram">
+                    <a href="#">
+                        <img src="images/item-instagram-1.jpg" alt="img">
+                    </a>
+                    <span class="text">
+                        <i class="icon fa fa-instagram" aria-hidden="true"></i>
+			        </span>
+                </div>
+                <div class="item-instagram">
+                    <a href="#">
+                        <img src="images/item-instagram-2.jpg" alt="img">
+                    </a>
+                    <span class="text">
+                        <i class="icon fa fa-instagram" aria-hidden="true"></i>
+			        </span>
+                </div>
+                <div class="item-instagram">
+                    <a href="#">
+                        <img src="images/item-instagram-3.jpg" alt="img">
+                    </a>
+                    <span class="text">
+                        <i class="icon fa fa-instagram" aria-hidden="true"></i>
+			        </span>
+                </div>
+                <div class="item-instagram">
+                    <a href="#">
+                        <img src="images/item-instagram-4.jpg" alt="img">
+                    </a>
+                    <span class="text">
+                        <i class="icon fa fa-instagram" aria-hidden="true"></i>
+			        </span>
+                </div>
+                <div class="item-instagram">
+                    <a href="#">
+                        <img src="images/item-instagram-5.jpg" alt="img">
+                    </a>
+                    <span class="text">
+                        <i class="icon fa fa-instagram" aria-hidden="true"></i>
+			        </span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-column equal-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 equal-elem">
+                        <div class="logo-footer"><img src="images/logo-light.png" alt="logo"></div>
+                        <div class="contacts">
+                            <span class="contacts-info info-address ">中国 江干区 九堡旺天商务楼</span>
+                            <span class="contacts-info info-phone">(+86) 123 456 10319</span>
+                            <span class="contacts-info info-support">541252708@JRMShop.com</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-6 equal-elem">
+                        <div class="links">
+                            <h3 class="title-of-section">我的账户</h3>
+                            <ul>
+                                <li><a href="#">登录</a></li>
+                                <li><a href="#">查看购物车</a></li>
+                                <li><a href="#">我的愿望单</a></li>
+                                <li><a href="#">条款及细则</a></li>
+                                <li><a href="#">联系我们</a></li>
+                                <li><a href="#">追踪我的订单</a></li>
+                                <li><a href="#">帮助</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-6 equal-elem">
+                        <div class="links">
+                            <h3 class="title-of-section">信息</h3>
+                            <ul>
+                                <li><a href="#">特价商品</a></li>
+                                <li><a href="#">最新产品</a></li>
+                                <li><a href="#">最畅销</a></li>
+                                <li><a href="#">关于我们</a></li>
+                                <li><a href="#">联系我们</a></li>
+                                <li><a href="#">网站地图</a></li>
+                                <li><a href="#">博客</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 equal-elem">
+                        <div class="links">
+                            <h3 class="title-of-section">联系</h3>
+                            <span class="span-newsletter">获取有关新产品，限量发行等的通知</span>
+                            <div class="newsletter-form">
+                                <form id="newsletter-validate-detail" class="form subscribe">
+                                    <div class="control">
+                                        <input type="email" placeholder="输入你的邮箱" id="newsletter" name="email"
+                                               class="input-subscribe">
+                                        <button type="submit" title="Subscribe" class="btn subscribe">
+                                            <span>注册</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="socials">
+                                <a href="#" class="social"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#" class="social"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#" class="social"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                                <a href="#" class="social"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright full-width">
+            <div class="container">
+                <div class="copyright-right">
+                    Copyright &copy; 2020.Company name All rights reserved.<a target="_blank"
+                                                                              href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                </div>
+                <div class="pay-men">
+                    <a href="#"><img src="images/general/pay1.jpg" alt="pay1"></a>
+                    <a href="#"><img src="images/general/pay2.jpg" alt="pay2"></a>
+                    <a href="#"><img src="images/general/pay3.jpg" alt="pay3"></a>
+                    <a href="#"><img src="images/general/pay4.jpg" alt="pay4"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end FOOTER -->
+</div>
+<a href="#" id="scrollup" title="Scroll to Top">Scroll</a>
+<!-- jQuery -->
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="js/wow.min.js"></script>
+<script type="text/javascript" src="js/jquery.actual.min.js"></script>
+<script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="js/jquery.sticky.js"></script>
+<script type="text/javascript" src="js/jquery.elevateZoom.min.js"></script>
+<script src="js/fancybox/source/jquery.fancybox.pack.js"></script>
+<script src="js/fancybox/source/helpers/jquery.fancybox-media.js"></script>
+<script src="js/fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
+<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
+<script type="text/javascript" src="js/function.js"></script>
+<script type="text/javascript" src="js/Modernizr.js"></script>
+<script type="text/javascript" src="js/jquery.plugin.js"></script>
+<script type="text/javascript" src="js/jquery.countdown.js"></script>
+</body>
+</html>

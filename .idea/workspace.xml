@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7cf61b8d-a4e4-42b9-b23e-e57de183f902" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - myshop@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - myshop@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - myshop@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="myshop: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - myshop@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="myshop: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="goods: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - myshop@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="myshop: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="orders: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - myshop@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="myshop: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="orders_info: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - myshop@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="myshop: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="shop_address: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - myshop@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="myshop: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="shop_car: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\MAVEN\apache-maven-3.6.2\maven-repo" />
+        <option name="mavenHome" value="D:/MAVEN/apache-maven-3.6.2" />
+        <option name="userSettingsFile" value="D:\MAVEN\apache-maven-3.6.2\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+        <option name="jdkForImporter" value="1.8" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="1.8" />
+    <option name="vmOptions" value="-Dmaven.multiModuleProjectDirectory=$MAVEN_HOME -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true" />
+  </component>
+  <component name="ProjectId" id="1eezbn0oXqfSAwfYO70Nu3fgnyy" />
+  <component name="ProjectViewState">
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="js.last.introduce.type" value="VAR" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.qf.service.impl" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\JianRenMeng\IdeaProjects\JRMShop\src\main\webapp\images" />
+      <recent name="C:\Users\JianRenMeng\IdeaProjects\JRMShop\src\main\webapp" />
+      <recent name="C:\Users\JianRenMeng\IdeaProjects\JRMShop\src\main\webapp\images\general" />
+      <recent name="C:\Users\JianRenMeng\IdeaProjects\JRMShop\src\main\webapp\js" />
+      <recent name="C:\Users\JianRenMeng\IdeaProjects\JRMShop\src\main\webapp\css" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn tomcat7:run" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Maven.JRMShop">
+    <configuration name="MailUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.qf.utils.MailUtils" />
+      <module name="JRMShop" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qf.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.qf.servlet.Test" />
+      <module name="JRMShop" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qf.servlet.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JRMShop" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="tomcat7:run" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MailUtils" />
+        <item itemvalue="Application.Test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7cf61b8d-a4e4-42b9-b23e-e57de183f902" name="Default Changelist" comment="" />
+      <created>1594696919298</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1594696919298</updated>
+      <workItem from="1594696920668" duration="34000" />
+      <workItem from="1594696972268" duration="13000" />
+      <workItem from="1594697001990" duration="30017000" />
+      <workItem from="1594773074170" duration="29826000" />
+      <workItem from="1594859595218" duration="32791000" />
+      <workItem from="1594945591245" duration="6700000" />
+      <workItem from="1594976209254" duration="10026000" />
+      <workItem from="1595032404072" duration="11856000" />
+      <workItem from="1595074520508" duration="8765000" />
+      <workItem from="1595155942887" duration="10467000" />
+      <workItem from="1595205393560" duration="34804000" />
+      <workItem from="1595291374961" duration="42422000" />
+      <workItem from="1595378477099" duration="37583000" />
+      <workItem from="1595465676133" duration="909000" />
+      <workItem from="1595468498112" duration="37266000" />
+      <workItem from="1595550305429" duration="6933000" />
+      <workItem from="1600341553028" duration="1731000" />
+      <workItem from="1600357037554" duration="424000" />
+      <workItem from="1600742216672" duration="712000" />
+      <workItem from="1600831698395" duration="599000" />
+      <workItem from="1600850069352" duration="1138000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="223" y="70" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594698119423">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="70" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1594698119423" />
+    <state x="574" y="121" key="#com.intellij.ide.util.MemberChooser" timestamp="1595516458476">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="121" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1595516458476" />
+    <state x="553" y="302" width="429" height="225" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1594730715117">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="553" y="302" width="429" height="225" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1594730715117" />
+    <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1595385253830">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1595385253830" />
+    <state x="549" y="170" key="FileChooserDialogImpl" timestamp="1595556560071">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1595556560071" />
+    <state width="1493" height="296" key="GridCell.Tab.0.bottom" timestamp="1595577280282">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="296" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1595577280282" />
+    <state width="1493" height="296" key="GridCell.Tab.0.center" timestamp="1595577280282">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="296" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1595577280282" />
+    <state width="1493" height="296" key="GridCell.Tab.0.left" timestamp="1595577280282">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="296" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1595577280282" />
+    <state width="1493" height="296" key="GridCell.Tab.0.right" timestamp="1595577280282">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="296" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1595577280282" />
+    <state width="1493" height="260" key="GridCell.Tab.1.bottom" timestamp="1595062044820">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="260" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1595062044820" />
+    <state width="1493" height="260" key="GridCell.Tab.1.center" timestamp="1595062044820">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="260" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1595062044820" />
+    <state width="1493" height="260" key="GridCell.Tab.1.left" timestamp="1595062044819">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="260" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1595062044819" />
+    <state width="1493" height="260" key="GridCell.Tab.1.right" timestamp="1595062044820">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="260" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1595062044820" />
+    <state width="212" height="477" key="HiddenNamespacesPopup" timestamp="1594698124187">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="212" height="477" key="HiddenNamespacesPopup/0.0.1536.824@0.0.1536.824" timestamp="1594698124187" />
+    <state x="349" y="158" key="IDE.errors.dialog" timestamp="1594718919841">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="349" y="158" key="IDE.errors.dialog/0.0.1536.824@0.0.1536.824" timestamp="1594718919841" />
+    <state x="249" y="0" key="SettingsEditor" timestamp="1594696951683">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1594696951683" />
+    <state x="590" y="163" width="944" height="692" key="find.popup" timestamp="1600850098261">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="472" y="129" width="755" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1595506441349" />
+    <state x="590" y="163" width="944" height="692" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600850098261" />
+    <state x="511" y="45" key="refactoring.ChangeSignatureDialog" timestamp="1595493829891">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="511" y="45" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1595493829891" />
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1595469031053">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1595469031053" />
+    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1595516368381">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1595516368381" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/qf/dao/impl/GoodsDaoImpl.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/webapp/index.html</url>
+          <line>23</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/webapp/grid-product-right.html</url>
+          <line>182</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
